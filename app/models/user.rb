@@ -1,8 +1,13 @@
 class User < ActiveRecord::Base
-has_one :address
-has_many :posts
+  has_one :address
+  has_many :posts
 
-acts_as_authentic
+  deligate :city, :country, :to => :address
 
+  acts_as_authentic
+
+  def to_s
+    "#{user_name}"
+  end
 end
 

@@ -1,14 +1,16 @@
 <h1>Posts</h1>
 
 <h2>What people are talking about</h2>
-<% @popular_posts.each do |post| %>
+<% @popular_posts.find_each(:batch_size => 200) do |post| %>
   <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
   <%= post.text %>
 <% end %>
 
 <h2>All Posts</h2>
-<% for post in @posts %>
+<% @posts.find_each(:batch_size => 200) do |post| %>
   <h4><%= link_to "#{post.title} (#{post.comments.length})", user_post_path(current_user,post) %></h4>
   <%= post.text %>
 <% end %>
+
+
 
